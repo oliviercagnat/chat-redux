@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+// bindActionCreators: make the action accessible
 import { bindActionCreators } from 'redux';
+// connect: permits to export the containers
 import { connect } from 'react-redux';
+// actions that we import directly
 import { createMessage } from '../actions/index';
 
 class MessageForm extends Component {
@@ -9,14 +12,17 @@ class MessageForm extends Component {
     this.state = { value: '' };
   }
 
+  // focus
   componentDidMount() {
     this.messageBox.focus();
   }
 
+  // When filling the form
   handleChange = (event) => {
     this.setState({ value: event.target.value });
   }
 
+  // handleSubmit: access the createMessage action
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.createMessage(this.props.selectedChannel, this.props.currentUser, this.state.value);
@@ -40,10 +46,13 @@ class MessageForm extends Component {
   }
 }
 
+// mapDispatchToProps: bind the action to the props of the component.
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ createMessage }, dispatch);
 }
 
+// mapStateToProps: bind the this.props.state to the Redux State tree (index.jsx)
+// Receive the Redux State in state, returns the props you want to update.
 function mapStateToProps(state) {
   return {
     currentUser: state.currentUser,
@@ -51,4 +60,5 @@ function mapStateToProps(state) {
   };
 }
 
+// connect: connect our class to mapStateToProps and mapDispatchToProps so we are connected to the Reducers and Actions
 export default connect(mapStateToProps, mapDispatchToProps)(MessageForm);

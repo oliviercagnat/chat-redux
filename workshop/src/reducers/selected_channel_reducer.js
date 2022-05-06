@@ -1,5 +1,6 @@
 import { CHANNEL_SELECTED } from '../actions';
 
+
 export default function (state = null, action) {
   switch (action.type) {
     case CHANNEL_SELECTED: {
@@ -10,3 +11,4 @@ export default function (state = null, action) {
     }
   }
 }
+// => See index.jsx for the reducer => state operation
